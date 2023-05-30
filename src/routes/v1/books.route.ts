@@ -6,7 +6,7 @@ router.get('/', async (req: Request, res: Response) => {
   try {
     res
       .status(200)
-      .json("let's find something. Test in AWS Lambda now! final test");
+      .json("let's find something. Test in AWS Lambda now! final test, 123");
   } catch (error) {
     console.error('An error ocurred:', error);
     res.status(500).json(error);
