@@ -4,7 +4,7 @@ const router = Router();
 
 router.get('/', async (req: Request, res: Response) => {
   try {
-    res.status(200).json("hello Derek");
+    res.status(200).json("hello Derek ABC1233123 SCC!!!");
   } catch (error) {
     console.error('An error ocurred:', error);
     res.status(500).json(error);
@@ -13,7 +13,7 @@ router.get('/', async (req: Request, res: Response) => {
 
 router.get('/:id', async (req: Request, res: Response) => {
   try {
-    res.status(200).json({});
+    res.status(200).json({test: 1});
   } catch (error) {
     console.error('An error ocurred:', error);
     res.status(500).json(error);

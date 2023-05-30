@@ -4,7 +4,7 @@ const express_1 = require("express");
 const router = (0, express_1.Router)();
 router.get('/', async (req, res) => {
     try {
-        res.status(200).json([]);
+        res.status(200).json("Let's go, we success!");
     }
     catch (error) {
         console.error('An error ocurred:', error);
@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
 });
 router.get('/:id', async (req, res) => {
     try {
-        res.status(200).json({});
+        res.status(200).json({ test: 1 });
     }
     catch (error) {
         console.error('An error ocurred:', error);
