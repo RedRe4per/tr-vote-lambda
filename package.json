@@ -10,7 +10,8 @@
     "watch": "tsc -w",
     "sls": "serverless offline start",
     "start": "concurrently \"npm:watch\" \"nodemon --delay 1500ms -e js --watch dist --exec npm run sls\"",
-    "dev": "npm run build && serverless offline start"
+    "dev": "npm run build && serverless offline start",
+    "pre-commit": "npm run prettier && npm run lint"
   },
   "husky": {
     "hooks": {
