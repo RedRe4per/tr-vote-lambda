@@ -12,8 +12,8 @@ provider:
         - dynamodb:DeleteItem
         - dynamodb:Scan
         - dynamodb:Query
-      Resource: 
-        - 'Fn::GetAtt': [ MyDynamoDbTable, Arn ]
+      Resource:
+        - 'Fn::GetAtt': [MyDynamoDbTable, Arn]
 functions:
   app:
     handler: dist/app.handler
