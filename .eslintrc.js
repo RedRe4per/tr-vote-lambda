@@ -8,4 +8,4 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended', // Make sure this is always the last configuration in the extends array.
   ],
-}
+};
