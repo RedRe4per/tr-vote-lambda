@@ -1,4 +1,7 @@
 import { Request, Response, Router } from 'express';
+import { putItem, getItem } from '../../utils/dynamodb';
+import AWS from 'aws-sdk';
+const dynamodb = new AWS.DynamoDB.DocumentClient();
 
 const router = Router();
 
@@ -12,20 +15,26 @@ router.get('/', async (req: Request, res: Response) => {
 });
 
 router.get('/:id', async (req: Request, res: Response) => {
+  const { id } = req.params;
+
   try {
-    res.status(200).json({ test: 1 });
+    const book = await getItem('books', { id });
+    res.status(200).json(book);
   } catch (error) {
-    console.error('An error ocurred:', error);
-    res.status(500).json(error);
+    console.error('Error fetching book:', error);
+    res.status(500).json({ error: 'Could not fetch book' });
   }
 });
 
 router.post('/', async (req: Request, res: Response) => {
+  const book = req.body;
+
   try {
-    res.status(201).json({});
+    await putItem('books', book);
+    res.status(201).json({ message: 'Book created' });
   } catch (error) {
-    console.error('An error occurred:', error);
-    res.status(500).json(error);
+    console.error('Error creating book:', error);
+    res.status(500).json({ error: 'Could not create book' });
   }
 });
 
