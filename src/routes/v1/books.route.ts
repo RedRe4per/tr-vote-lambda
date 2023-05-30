@@ -4,7 +4,7 @@ const router = Router();
 
 router.get('/', async (req: Request, res: Response) => {
   try {
-    res.status(200).json("let's find something. Test in AWS Lambda now! test2");
+    res.status(200).json("let's find something. Test in AWS Lambda now! final test");
   } catch (error) {
     console.error('An error ocurred:', error);
     res.status(500).json(error);
