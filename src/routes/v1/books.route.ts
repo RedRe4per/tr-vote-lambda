@@ -1,13 +1,15 @@
 import { Request, Response, Router } from 'express';
-import { putItem, getItem } from '../../utils/dynamodb';
+import { putItem, getItem, scanTable } from '../../utils/dynamodb';
+import { v4 as uuidv4 } from 'uuid';
 import AWS from 'aws-sdk';
-const dynamodb = new AWS.DynamoDB.DocumentClient();
 
+const dynamodb = new AWS.DynamoDB.DocumentClient();
 const router = Router();
 
 router.get('/', async (req: Request, res: Response) => {
   try {
-    res.status(200).json("let's find something. Test in AWS Lambda now!");
+    const table = await scanTable("tr-vote");
+    res.status(200).json(table);
   } catch (error) {
     console.error('An error ocurred:', error);
     res.status(500).json(error);
@@ -27,10 +29,13 @@ router.get('/:id', async (req: Request, res: Response) => {
 });
 
 router.post('/', async (req: Request, res: Response) => {
-  const book = req.body;
+  const book = {
+    id: uuidv4(),
+    ...req.body,
+  };
 
   try {
-    await putItem('books', book);
+    await putItem('tr-vote', book);
     res.status(201).json({ message: 'Book created' });
   } catch (error) {
     console.error('Error creating book:', error);
