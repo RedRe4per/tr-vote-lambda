@@ -4,7 +4,7 @@ const express_1 = require("express");
 const router = (0, express_1.Router)();
 router.get('/', async (req, res) => {
     try {
-        res.status(200).json("Let's go, we success!");
+        res.status(200).json("let's find something. Test in AWS Lambda now!");
     }
     catch (error) {
         console.error('An error ocurred:', error);
