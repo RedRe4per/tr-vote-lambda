@@ -11,7 +11,7 @@ const dynamodb = new aws_sdk_1.default.DynamoDB.DocumentClient();
 const router = (0, express_1.Router)();
 router.get('/', async (req, res) => {
     try {
-        const table = await (0, dynamodb_1.scanTable)("tr-vote");
+        const table = await (0, dynamodb_1.scanTable)('tr-vote');
         res.status(200).json(table);
     }
     catch (error) {

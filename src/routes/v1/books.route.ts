@@ -8,7 +8,7 @@ const router = Router();
 
 router.get('/', async (req: Request, res: Response) => {
   try {
-    const table = await scanTable("tr-vote");
+    const table = await scanTable('tr-vote');
     res.status(200).json(table);
   } catch (error) {
     console.error('An error ocurred:', error);
