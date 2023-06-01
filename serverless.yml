@@ -27,7 +27,7 @@ resources:
     MyDynamoDbTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: User
+        TableName: tr-vote
         AttributeDefinitions:
           - AttributeName: id
             AttributeType: S
