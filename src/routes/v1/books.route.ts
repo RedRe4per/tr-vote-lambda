@@ -1,15 +1,12 @@
 import { Request, Response, Router } from 'express';
-import { putItem, getItem, scanTable } from '../../utils/dynamodb';
 import { v4 as uuidv4 } from 'uuid';
-import AWS from 'aws-sdk';
+import { UserModel } from '../../models/user';
 
-const dynamodb = new AWS.DynamoDB.DocumentClient();
 const router = Router();
 
 router.get('/', async (req: Request, res: Response) => {
   try {
-    const table = await scanTable('tr-vote');
-    res.status(200).json(table);
+    res.status(200).json('table');
   } catch (error) {
     console.error('An error ocurred:', error);
     res.status(500).json(error);
@@ -20,8 +17,7 @@ router.get('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
-    const book = await getItem('books', { id });
-    res.status(200).json(book);
+    res.status(200).json('book');
   } catch (error) {
     console.error('Error fetching book:', error);
     res.status(500).json({ error: 'Could not fetch book' });
@@ -29,14 +25,19 @@ router.get('/:id', async (req: Request, res: Response) => {
 });
 
 router.post('/', async (req: Request, res: Response) => {
-  const book = {
-    id: uuidv4(),
-    ...req.body,
-  };
+  // const book = {
+  //   id: uuidv4(),
+  //   ...req.body,
+  // };
 
   try {
-    await putItem('tr-vote', book);
-    res.status(201).json({ message: 'Book created' });
+    const user = new UserModel({
+      id: '1',
+      name: 'Derek',
+      email: 'zhangsan@example.com',
+    });
+    user.save();
+    res.status(201).json({ message: 'user created' });
   } catch (error) {
     console.error('Error creating book:', error);
     res.status(500).json({ error: 'Could not create book' });
