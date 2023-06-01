@@ -38,7 +38,7 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-    UserTable: 
+    UserTable:
       Type: AWS::DynamoDB::Table
       Properties:
         TableName: User
@@ -51,4 +51,3 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-
