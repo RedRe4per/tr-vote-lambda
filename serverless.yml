@@ -12,7 +12,7 @@ provider:
         - dynamodb:DeleteItem
         - dynamodb:Scan
         - dynamodb:Query
-      Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/*"
+      Resource: 'arn:aws:dynamodb:${self:provider.region}:*:table/*'
 functions:
   app:
     handler: dist/app.handler
