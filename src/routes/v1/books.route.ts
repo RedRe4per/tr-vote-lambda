@@ -27,16 +27,10 @@ router.get('/:id', async (req: Request, res: Response) => {
 });
 
 router.post('/', async (req: Request, res: Response) => {
-  // const book = {
-  //   id: uuidv4(),
-  //   ...req.body,
-  // };
-
   try {
     const user = new UserModel({
       id: uuidv4(),
-      name: 'Derek',
-      email: 'zhangsan@example.com',
+      ...req.body,
     });
     user.save();
     res.status(201).json({ message: 'new item created', item: user });
@@ -63,7 +57,7 @@ router.delete('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
-    await UserModel.delete(id);
+    await UserModel.update({ id }, { isDeleted: true });
     res.status(200).json({ message: 'User deleted' });
   } catch (error) {
     console.error('An error occurred:', error);

@@ -3,6 +3,7 @@
 /.serverless/
 /_warmup/
 /dist/
+dist/
 
 .env*.local
 .env

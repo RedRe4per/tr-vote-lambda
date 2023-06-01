@@ -26,15 +26,10 @@ router.get('/:id', async (req, res) => {
     }
 });
 router.post('/', async (req, res) => {
-    // const book = {
-    //   id: uuidv4(),
-    //   ...req.body,
-    // };
     try {
         const user = new user_1.UserModel({
             id: (0, uuid_1.v4)(),
-            name: 'Derek',
-            email: 'zhangsan@example.com',
+            ...req.body,
         });
         user.save();
         res.status(201).json({ message: 'new item created', item: user });
@@ -59,7 +54,7 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     const { id } = req.params;
     try {
-        await user_1.UserModel.delete(id);
+        await user_1.UserModel.update({ id }, { isDeleted: true });
         res.status(200).json({ message: 'User deleted' });
     }
     catch (error) {
