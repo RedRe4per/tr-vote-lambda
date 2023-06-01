@@ -1,7 +1,6 @@
 import { UserModel } from '../models/user';
 import { v4 as uuidv4 } from 'uuid';
-import { getCurrentTimestamp } from '../utils/time';
-import { IUserCreate } from '../../interfaces/interfaces';
+import { IUserCreate } from '@/interfaces/interfaces';
 
 export const listAll = async () => {
   return UserModel.scan().limit(50).exec();
@@ -25,7 +24,8 @@ export const update = async (id: string, body: Partial<IUserCreate>) => {
     id,
     ...(name && { name }),
     ...(email && { email }),
-    updatedAt: getCurrentTimestamp(),
+    updatedAt: Date.now(),
+
   });
 };
 
@@ -33,6 +33,7 @@ export const deleteById = async (id: string) => {
   return UserModel.update({
     id,
     isDeleted: true,
-    updatedAt: getCurrentTimestamp(),
+    updatedAt: Date.now(),
+
   });
 };
