@@ -1,9 +1,9 @@
 import { Router } from 'express';
 
-import v1 from './v1';
+import books from './books.route';
 
 const router = Router();
 
-router.use('/v1', v1);
+router.use('/books', books);
 
 export default router;
