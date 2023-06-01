@@ -39,18 +39,27 @@ router.post('/', async (req: Request, res: Response) => {
   }
 });
 
-router.put('/:id', async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const { name, email } = req.body;
-
+router.put('/test', async (req: Request, res: Response) => {
   try {
-    await UserModel.update({ id, name, email });
-    res.status(200).json({ message: 'User updated' });
+    res.status(200).json({ message: 'test' });
   } catch (error) {
     console.error('Error updating user:', error);
     res.status(500).json({ error: 'Could not update user' });
   }
 });
+
+// router.put('/:id', async (req: Request, res: Response) => {
+//   const { id } = req.params;
+//   const { name, email } = req.body;
+
+//   try {
+//     await UserModel.update({ id, name, email });
+//     res.status(200).json({ message: 'User updated' });
+//   } catch (error) {
+//     console.error('Error updating user:', error);
+//     res.status(500).json({ error: 'Could not update user' });
+//   }
+// });
 
 router.delete('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
