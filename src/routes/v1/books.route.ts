@@ -16,7 +16,6 @@ router.get('/', async (req: Request, res: Response) => {
 
 router.get('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
-
   try {
     const user = await UserModel.get(id);
     res.status(200).json(user);
@@ -33,7 +32,7 @@ router.post('/', async (req: Request, res: Response) => {
       ...req.body,
     });
     user.save();
-    res.status(201).json({ message: 'new item created', item: user });
+    res.status(201).json({ message: 'new user created', item: user });
   } catch (error) {
     console.error('Error creating book:', error);
     res.status(500).json({ error: 'Could not create book' });
