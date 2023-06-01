@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 });
 router.get('/test', async (req, res) => {
     try {
-        res.status(200).json('server test pass!');
+        res.status(200).json('server test pass! 123');
     }
     catch (error) {
         console.error('An error ocurred:', error);
