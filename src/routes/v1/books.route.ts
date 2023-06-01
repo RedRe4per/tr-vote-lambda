@@ -6,7 +6,7 @@ const router = Router();
 
 router.get('/', async (req: Request, res: Response) => {
   try {
-    const users = await UserModel.scan().limit(10).exec();
+    const users = await UserModel.scan().limit(50).exec();
     res.status(200).json(users);
   } catch (error) {
     console.error('An error ocurred:', error);
