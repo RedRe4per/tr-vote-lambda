@@ -41,7 +41,7 @@ router.post('/', async (req: Request, res: Response) => {
 
 router.put('/test', async (req: Request, res: Response) => {
   try {
-    res.status(200).json({ message: 'test' });
+    res.status(200).json({ message: 'test, plz success!' });
   } catch (error) {
     console.error('Error updating user:', error);
     res.status(500).json({ error: 'Could not update user' });
