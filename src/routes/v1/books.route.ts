@@ -32,7 +32,7 @@ router.post('/', async (req: Request, res: Response) => {
       ...req.body,
     });
     user.save();
-    res.status(201).json({ message: 'new user created', item: user });
+    res.status(201).json({ message: 'new user created, 123', item: user });
   } catch (error) {
     console.error('Error creating book:', error);
     res.status(500).json({ error: 'Could not create book' });
