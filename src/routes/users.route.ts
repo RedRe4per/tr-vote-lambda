@@ -5,7 +5,7 @@ import {
   create,
   update,
   deleteById,
-} from '../controllers/books.controller';
+} from '../controllers/users.controller';
 
 const router = Router();
 

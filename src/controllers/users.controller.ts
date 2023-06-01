@@ -1,4 +1,4 @@
-import * as UserService from '../services/book.service';
+import * as UserService from '../services/users.service';
 import { Request, Response } from 'express';
 
 export const listAll = async (req: Request, res: Response) => {
@@ -27,16 +27,15 @@ export const create = async (req: Request, res: Response) => {
     const user = await UserService.create(req.body);
     res.status(201).json({ message: 'new user created', item: user });
   } catch (error) {
-    console.error('Error creating book:', error);
-    res.status(500).json({ error: 'Could not create book' });
+    console.error('Error creating user:', error);
+    res.status(500).json({ error: 'Could not create user' });
   }
 };
 
 export const update = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { name, email } = req.body;
   try {
-    await UserService.update(id, name, email);
+    await UserService.update(id, req.body);
     res.status(200).json({ message: 'User updated' });
   } catch (error) {
     console.error('Error updating user:', error);
