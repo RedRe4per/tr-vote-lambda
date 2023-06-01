@@ -1,9 +1,9 @@
 import { Router } from 'express';
 
-import books from './books.route';
+import users from './users.route';
 
 const router = Router();
 
-router.use('/books', books);
+router.use('/user', users);
 
 export default router;
