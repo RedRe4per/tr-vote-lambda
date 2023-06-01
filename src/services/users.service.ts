@@ -25,7 +25,6 @@ export const update = async (id: string, body: Partial<IUserCreate>) => {
     ...(name && { name }),
     ...(email && { email }),
     updatedAt: Date.now(),
-
   });
 };
 
@@ -34,6 +33,5 @@ export const deleteById = async (id: string) => {
     id,
     isDeleted: true,
     updatedAt: Date.now(),
-
   });
 };
