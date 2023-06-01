@@ -13,7 +13,7 @@ provider:
         - dynamodb:Scan
         - dynamodb:Query
       Resource:
-        - 'Fn::GetAtt': [MyDynamoDbTable, Arn]
+        - 'Fn::GetAtt': [MyDynamoDbTable, Arn, tr-vote, User]
 functions:
   app:
     handler: dist/app.handler
@@ -27,7 +27,7 @@ resources:
     MyDynamoDbTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: tr-vote
+        TableName: User
         AttributeDefinitions:
           - AttributeName: id
             AttributeType: S
