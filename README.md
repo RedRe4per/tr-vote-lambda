@@ -23,6 +23,6 @@
 
    Commit your code directly to the main branch and it will automatically deploy to AWS Lambda in minutes (if the deployment is successful).
 
-4. **DynamoDB connect fail in cloud (PROD env)**
+5. **DynamoDB connect fail in cloud (PROD env)**
 
    The reason for the failure is that `DynamoDB full access` is not included in Lambda's default permissions. Therefore, you need to find the IAM role of Lambda first, and then add the `DynamoDB full access` permission.
