@@ -1,57 +1,70 @@
-'use strict';
-Object.defineProperty(exports, '__esModule', { value: true });
-const express_1 = require('express');
-const user_1 = require('../../models/user');
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const uuid_1 = require("uuid");
+const user_1 = require("../../models/user");
 const router = (0, express_1.Router)();
 router.get('/', async (req, res) => {
-  try {
-    res.status(200).json('table');
-  } catch (error) {
-    console.error('An error ocurred:', error);
-    res.status(500).json(error);
-  }
+    try {
+        const users = await user_1.UserModel.scan().limit(10).exec();
+        res.status(200).json(users);
+    }
+    catch (error) {
+        console.error('An error ocurred:', error);
+        res.status(500).json(error);
+    }
 });
 router.get('/:id', async (req, res) => {
-  const { id } = req.params;
-  try {
-    res.status(200).json('book');
-  } catch (error) {
-    console.error('Error fetching book:', error);
-    res.status(500).json({ error: 'Could not fetch book' });
-  }
+    const { id } = req.params;
+    try {
+        const user = await user_1.UserModel.get(id);
+        res.status(200).json(user);
+    }
+    catch (error) {
+        console.error('Error fetching user:', error);
+        res.status(500).json({ error: 'Could not fetch user' });
+    }
 });
 router.post('/', async (req, res) => {
-  // const book = {
-  //   id: uuidv4(),
-  //   ...req.body,
-  // };
-  try {
-    const user = new user_1.UserModel({
-      id: '1',
-      name: 'Derek',
-      email: 'zhangsan@example.com',
-    });
-    user.save();
-    res.status(201).json({ message: 'user created' });
-  } catch (error) {
-    console.error('Error creating book:', error);
-    res.status(500).json({ error: 'Could not create book' });
-  }
+    // const book = {
+    //   id: uuidv4(),
+    //   ...req.body,
+    // };
+    try {
+        const user = new user_1.UserModel({
+            id: (0, uuid_1.v4)(),
+            name: 'Derek',
+            email: 'zhangsan@example.com',
+        });
+        user.save();
+        res.status(201).json({ message: 'new item created', item: user });
+    }
+    catch (error) {
+        console.error('Error creating book:', error);
+        res.status(500).json({ error: 'Could not create book' });
+    }
 });
 router.put('/:id', async (req, res) => {
-  try {
-    res.status(200).json({});
-  } catch (error) {
-    console.error('An error occurred:', error);
-    res.status(500).json(error);
-  }
+    const { id } = req.params;
+    const { name, email } = req.body;
+    try {
+        await user_1.UserModel.update({ id, name, email });
+        res.status(200).json({ message: 'User updated' });
+    }
+    catch (error) {
+        console.error('Error updating user:', error);
+        res.status(500).json({ error: 'Could not update user' });
+    }
 });
 router.delete('/:id', async (req, res) => {
-  try {
-    res.status(200).json({});
-  } catch (error) {
-    console.error('An error occurred:', error);
-    res.status(500).json(error);
-  }
+    const { id } = req.params;
+    try {
+        await user_1.UserModel.delete(id);
+        res.status(200).json({ message: 'User deleted' });
+    }
+    catch (error) {
+        console.error('An error occurred:', error);
+        res.status(500).json({ error: 'Could not delete user' });
+    }
 });
 exports.default = router;

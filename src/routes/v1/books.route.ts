@@ -6,7 +6,8 @@ const router = Router();
 
 router.get('/', async (req: Request, res: Response) => {
   try {
-    res.status(200).json('table');
+    const users = await UserModel.scan().limit(10).exec();
+    res.status(200).json(users);
   } catch (error) {
     console.error('An error ocurred:', error);
     res.status(500).json(error);
@@ -17,10 +18,11 @@ router.get('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
-    res.status(200).json('book');
+    const user = await UserModel.get(id);
+    res.status(200).json(user);
   } catch (error) {
-    console.error('Error fetching book:', error);
-    res.status(500).json({ error: 'Could not fetch book' });
+    console.error('Error fetching user:', error);
+    res.status(500).json({ error: 'Could not fetch user' });
   }
 });
 
@@ -32,12 +34,12 @@ router.post('/', async (req: Request, res: Response) => {
 
   try {
     const user = new UserModel({
-      id: '1',
+      id: uuidv4(),
       name: 'Derek',
       email: 'zhangsan@example.com',
     });
     user.save();
-    res.status(201).json({ message: 'user created' });
+    res.status(201).json({ message: 'new item created', item: user });
   } catch (error) {
     console.error('Error creating book:', error);
     res.status(500).json({ error: 'Could not create book' });
@@ -45,20 +47,27 @@ router.post('/', async (req: Request, res: Response) => {
 });
 
 router.put('/:id', async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { name, email } = req.body;
+
   try {
-    res.status(200).json({});
+    await UserModel.update({ id, name, email });
+    res.status(200).json({ message: 'User updated' });
   } catch (error) {
-    console.error('An error occurred:', error);
-    res.status(500).json(error);
+    console.error('Error updating user:', error);
+    res.status(500).json({ error: 'Could not update user' });
   }
 });
 
 router.delete('/:id', async (req: Request, res: Response) => {
+  const { id } = req.params;
+
   try {
-    res.status(200).json({});
+    await UserModel.delete(id);
+    res.status(200).json({ message: 'User deleted' });
   } catch (error) {
     console.error('An error occurred:', error);
-    res.status(500).json(error);
+    res.status(500).json({ error: 'Could not delete user' });
   }
 });
 

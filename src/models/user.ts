@@ -1,9 +1,22 @@
 import { model, Schema } from 'dynamoose';
 
 const UserSchema = new Schema({
-  id: String,
-  name: String,
-  email: String,
+  id: {
+    type: String,
+    required: true,
+  },
+  name: {
+    type: String,
+    default: 'New User',
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  isDeleted: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 export const UserModel = model('User', UserSchema);
