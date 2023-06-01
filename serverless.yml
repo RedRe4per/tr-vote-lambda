@@ -14,6 +14,7 @@ provider:
         - dynamodb:Query
       Resource:
         - 'Fn::GetAtt': [MyDynamoDbTable, Arn]
+        - 'Fn::GetAtt': [UserTable, Arn]
 functions:
   app:
     handler: dist/app.handler
@@ -37,3 +38,17 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
+    UserTable: 
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: User
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+
