@@ -6,7 +6,7 @@ const user_1 = require("../../models/user");
 const router = (0, express_1.Router)();
 router.get('/', async (req, res) => {
     try {
-        const users = await user_1.UserModel.scan().limit(10).exec();
+        const users = await user_1.UserModel.scan().limit(50).exec();
         res.status(200).json(users);
     }
     catch (error) {
@@ -14,17 +14,25 @@ router.get('/', async (req, res) => {
         res.status(500).json(error);
     }
 });
-router.get('/:id', async (req, res) => {
-    const { id } = req.params;
+router.get('/test', async (req, res) => {
     try {
-        const user = await user_1.UserModel.get(id);
-        res.status(200).json(user);
+        res.status(200).json('server test pass!');
     }
     catch (error) {
-        console.error('Error fetching user:', error);
-        res.status(500).json({ error: 'Could not fetch user' });
+        console.error('An error ocurred:', error);
+        res.status(500).json(error);
     }
 });
+// router.get('/:id', async (req: Request, res: Response) => {
+//   const { id } = req.params;
+//   try {
+//     const user = await UserModel.get(id);
+//     res.status(200).json(user);
+//   } catch (error) {
+//     console.error('Error fetching user:', error);
+//     res.status(500).json({ error: 'Could not fetch user' });
+//   }
+// });
 router.post('/', async (req, res) => {
     try {
         const user = new user_1.UserModel({

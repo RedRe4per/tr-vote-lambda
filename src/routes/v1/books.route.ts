@@ -14,17 +14,26 @@ router.get('/', async (req: Request, res: Response) => {
   }
 });
 
-router.get('/:id', async (req: Request, res: Response) => {
-  const { id } = req.params;
-
+router.get('/test', async (req: Request, res: Response) => {
   try {
-    const user = await UserModel.get(id);
-    res.status(200).json(user);
+    res.status(200).json('server test pass!');
   } catch (error) {
-    console.error('Error fetching user:', error);
-    res.status(500).json({ error: 'Could not fetch user' });
+    console.error('An error ocurred:', error);
+    res.status(500).json(error);
   }
 });
+
+// router.get('/:id', async (req: Request, res: Response) => {
+//   const { id } = req.params;
+
+//   try {
+//     const user = await UserModel.get(id);
+//     res.status(200).json(user);
+//   } catch (error) {
+//     console.error('Error fetching user:', error);
+//     res.status(500).json({ error: 'Could not fetch user' });
+//   }
+// });
 
 router.post('/', async (req: Request, res: Response) => {
   try {
